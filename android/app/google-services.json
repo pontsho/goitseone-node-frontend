@@ -1,0 +1,40 @@
+{
+    "project_info": {
+      "project_number": "898939207054",
+      "firebase_url": "https://mzansi-beats.firebaseio.com",
+      "project_id": "mzansi-beats",
+      "storage_bucket": "mzansi-beats.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:898939207054:android:7175521c13676f1187f8df",
+          "android_client_info": {
+            "package_name": "com.pointsureservices.mzansibeats"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "898939207054-nq5j5q3ue5arvgghhds3l3d642pj3rei.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyDvKvBO-EJF1K5yayZ-mg1P2ASsoLflkqA"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "898939207054-nq5j5q3ue5arvgghhds3l3d642pj3rei.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }
