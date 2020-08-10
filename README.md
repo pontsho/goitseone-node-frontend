@@ -1,1 +1,0 @@
-# goitseone-node-frontend
