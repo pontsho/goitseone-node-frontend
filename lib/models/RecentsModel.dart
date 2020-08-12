@@ -30,4 +30,8 @@ class Recents extends ChangeNotifier {
     recently = await db.getRecents();
     notifyListeners();
   }
+
+  Future<bool> checkIfSeen() async {
+    return db.checkIfSeen();
+  }
 }

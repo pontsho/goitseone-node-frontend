@@ -29,6 +29,9 @@ class RecentsHelper {
           "uri TEXT,"
           "albumArt TEXT"
           ")");
+      await db.execute("""
+    CREATE TABLE userPrefs(id integer primary key autoincrement,seen number not null default 0)
+    """);
     });
   }
   deleteLast() async {
@@ -47,6 +50,14 @@ class RecentsHelper {
     List<Song> list =
         res.isNotEmpty ? res.map((c) => Song.fromMap(c)).toList() : [];
     return list;
+  }
+  Future<bool> checkIfSeen() async {
+    final db = await database;
+    var count =
+    Sqflite.firstIntValue(await db.rawQuery("SELECT seen FROM userPrefs"));
+    if (count > 0) return true;
+    return false;
+
   }
   toMap(Song s){
     return {

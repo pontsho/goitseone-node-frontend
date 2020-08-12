@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:mzansibeats/Models/Username.dart';
+import 'package:mzansibeats/database/database_client.dart';
 import 'package:mzansibeats/models/PlaylistRepo.dart';
 import 'package:mzansibeats/models/BookmarkModel.dart';
 import 'package:mzansibeats/models/Now_Playing.dart';
@@ -96,7 +97,7 @@ class _MyAppState extends State<MyApp> {
     model = Provider.of<SongsModel>(context);
     ThemeChanger theme = Provider.of<ThemeChanger>(context);
     return new MaterialApp(
-      home: new Splash(),
+      home: new Splash(model),
       theme: theme.getTheme(),
       debugShowCheckedModeBanner: false,
     );
@@ -105,6 +106,9 @@ class _MyAppState extends State<MyApp> {
 
 class Splash extends StatefulWidget {
   @override
+  final SongsModel model;
+
+  Splash(this.model);
   SplashState createState() => new SplashState();
 }
 
@@ -120,7 +124,9 @@ class SplashState extends State<Splash> {
 
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool _seen = (prefs.getBool('seen') ?? false);
+     bool _seen = (prefs.getBool('seen') ?? false);
+    //bool _seen  = await widget.model.recents.checkIfSeen();
+
 
     if (_seen) {
       SystemChrome.setEnabledSystemUIOverlays([]);

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flute_music_player/flute_music_player.dart';
+import 'package:mzansibeats/database/database_client.dart';
 import 'package:mzansibeats/models/ProgressModel.dart';
 import 'package:flutter_media_notification/flutter_media_notification.dart';
+import 'package:sqflite/sqflite.dart';
 import 'dart:math';
 import 'RecentsModel.dart';
 import 'package:flutter/services.dart';
@@ -24,6 +26,7 @@ class SongsModel extends ChangeNotifier {
   bool repeat = false;
   Random rnd = new Random();
   Recents recents;
+  DatabaseClient db;
 
   SongsModel(prov, rec) {
     fetchSongs();
@@ -31,8 +34,27 @@ class SongsModel extends ChangeNotifier {
     recents = rec;
   }
 
+
+  void initPlayer() async {
+    db = new DatabaseClient();
+    await db.create();
+    if (await db.alreadyLoaded()) {
+      getLast();
+    } else {
+      try {
+        songs = await MusicFinder.allSongs();
+      } catch (e) {
+        print("failed to get songs");
+      }
+      List<Song> list = new List.from(songs);
+      for (Song song in list) db.insertOrUpdateSong(song);
+
+       getLast();
+    }
+  }
+
   fetchSongs() async {
-    songs = await MusicFinder.allSongs();
+    initPlayer();
     if (songs.length == 0) songs = null;
     player = new MusicFinder();
     initValues();
@@ -44,6 +66,10 @@ class SongsModel extends ChangeNotifier {
     });
 
     notifyListeners();
+  }
+
+  void getLast() async {
+    songs = await db.fetchSongs();
   }
 
   updateUI() {
@@ -101,7 +127,8 @@ class SongsModel extends ChangeNotifier {
   pause() {
     player?.pause();
     currentState = PlayerState.PAUSED;
-    showNotification(currentSong.title, currentSong.artist, false);
+    if(currentSong != null)
+      showNotification(currentSong.title, currentSong.artist, false);
     updateUI();
   }
 

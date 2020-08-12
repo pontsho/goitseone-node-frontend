@@ -73,9 +73,16 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-      - assets/img1.png
-      - assets/img2.png
-      - assets/headphone.png
+    - assets/img1.png
+    - assets/img2.png
+    - assets/headphone.png
+    - images/back.jpg
+    - images/artist.jpg
+    - images/GitHub-Mark.png
+    - images/flogo.png
+    - images/music.jpg
+    - images/instalogo.png
+    - images/icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -105,7 +112,16 @@ flutter:
 
     - family: Sans
       fonts:
-        - asset: fonts/metropolis.otf     
+        - asset: fonts/metropolis.otf
+
+    - family: Quicksand
+      fonts:
+        - asset: assets/fonts/Quicksand-Medium.ttf
+        - asset: assets/fonts/Quicksand-Regular.ttf
+
+    - family: Google Sans
+      fonts:
+        - asset: assets/fonts/GoogleSans-Regular.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

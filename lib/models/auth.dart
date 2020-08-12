@@ -98,7 +98,7 @@ class Auth with ChangeNotifier {
   // }
 
   bool get isAuth {
-    return userId != null;
+    return onAuthStateChanged != null;
   }
 
   String get userId {
