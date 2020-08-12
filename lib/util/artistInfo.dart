@@ -94,7 +94,6 @@ class _GetArtistDetailState extends State<GetArtistDetail> {
                         onTap: showArtistPage(
                             artist.artist.similar.artist.toList()[i].name),
                         child: Card(
-                          elevation: 15.0,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,

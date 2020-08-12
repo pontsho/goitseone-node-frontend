@@ -150,10 +150,9 @@ class stateCardDetail extends State<ArtistCard> {
                             itemBuilder: (context, i) => Padding(
                               padding: const EdgeInsets.only(bottom: 30.0),
                               child: new Card(
-                                elevation: 15.0,
                                 child: new InkResponse(
                                   child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderRadius: BorderRadius.circular(4.0),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,

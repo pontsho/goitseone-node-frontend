@@ -38,10 +38,9 @@ class _StateArtist extends State<Artists> {
       return Card(
         color: Colors.transparent,
         margin: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 18.0),
-        elevation: 10.0,
         child: new InkWell(
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(5.0),
+            borderRadius: BorderRadius.circular(4.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
