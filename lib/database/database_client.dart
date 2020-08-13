@@ -20,9 +20,6 @@ class DatabaseClient {
     CREATE TABLE songs(id NUMBER,title TEXT,duration NUMBER,albumArt TEXT,album TEXT,uri TEXT,artist TEXT,albumId NUMBER,isFav number NOT NULL default 0,timestamp number,count number not null default 0)
     """);
     await db.execute("""
-    CREATE TABLE recents(id integer primary key autoincrement,title TEXT,duration NUMBER,albumArt TEXT,album TEXT,uri TEXT,artist TEXT,albumId NUMBER)
-    """);
-    await db.execute("""
     CREATE TABLE userPrefs(id integer primary key autoincrement,seen number not null default 0)
     """);
   }
@@ -251,23 +248,23 @@ class DatabaseClient {
     return songs;
   }
 
-//  Future<int> updateSong(Song song) async {
-//    int id = 0;
-//    var count = Sqflite.firstIntValue(await _db
-//        .rawQuery("SELECT COUNT(*) FROM songs WHERE id = ?", [song.id]));
-//    if (count == 0) {
-//      print("count=" + count.toString());
-//      id = await _db.insert("songs", song.toMap());
-//    } else {
-//      print("count=" + count.toString());
-//      await _db
-//          .update("songs", song.toMap(), where: "id= ?", whereArgs: [song.id]);
-//      // await _db.rawQuery("update songs set count =count +1 where id=${song.id}");
-//      print("updated");
-//    }
-//
-//    return id;
-//  }
+  Future<int> updateSong(Song song) async {
+    int id = 0;
+    var count = Sqflite.firstIntValue(await _db
+        .rawQuery("SELECT COUNT(*) FROM songs WHERE id = ?", [song.id]));
+    if (count == 0) {
+      print("count=" + count.toString());
+      id = await _db.insert("songs", toMap(song));
+    } else {
+      print("count=" + count.toString());
+      await _db
+          .update("songs", toMap(song), where: "id= ?", whereArgs: [song.id]);
+      // await _db.rawQuery("update songs set count =count +1 where id=${song.id}");
+      print("updated");
+    }
+
+    return id;
+  }
 
   Future<int> isfav(Song song) async {
     var c = Sqflite.firstIntValue(

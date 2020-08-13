@@ -4,7 +4,10 @@ import 'package:flute_music_player/flute_music_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mzansibeats/database/database_client.dart';
+import 'package:mzansibeats/models/ThemeModel.dart';
 import 'package:mzansibeats/pages/artistcard.dart';
+import 'package:provider/provider.dart';
+import 'package:mzansibeats/util/utility.dart';
 //import 'package:mzansibeats/pages/now_playing.dart';
 //import 'package:mzansibeats/util/lastplay.dart';
 
@@ -21,19 +24,13 @@ class CardDetail extends StatefulWidget {
 
 class _StateCardDetail extends State<CardDetail> {
   List<Song> songs;
-
+  ThemeChanger themeChanger;
   bool isLoading = true;
   var image;
   @override
   void initState() {
     super.initState();
     initAlbum();
-  }
-
-  dynamic getImage(Song song) {
-    return song.albumArt == null
-        ? null
-        : new File.fromUri(Uri.parse(song.albumArt));
   }
 
   void initAlbum() async {
@@ -48,9 +45,9 @@ class _StateCardDetail extends State<CardDetail> {
 
   @override
   Widget build(BuildContext context) {
+    themeChanger = Provider.of<ThemeChanger>(context);
     int length;
-    if (songs != null)
-      length = songs.length;
+    if (songs != null) length = songs.length;
     return new Scaffold(
       backgroundColor: Colors.transparent,
       body: Container(
@@ -74,7 +71,7 @@ class _StateCardDetail extends State<CardDetail> {
                         Hero(
                           tag: widget.song.album,
                           child: widget.song.albumArt != null
-                              ?  Image.file(
+                              ? Image.file(
                                   image,
                                   fit: BoxFit.cover,
                                 )
@@ -102,9 +99,9 @@ class _StateCardDetail extends State<CardDetail> {
                                 child: new Text(
                                   widget.song.album,
                                   style: new TextStyle(
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.w600,
-                                      ),
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -115,7 +112,7 @@ class _StateCardDetail extends State<CardDetail> {
                                   onTap: () {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(builder: (context) {
-                                     return ArtistCard(widget.db, widget.song);
+                                      return ArtistCard(widget.db, widget.song);
                                     }));
                                   },
                                   child: Row(
@@ -178,11 +175,31 @@ class _StateCardDetail extends State<CardDetail> {
                             leading: Hero(
                                 tag: songs[i].id,
                                 child: songs[i].albumArt != null
-                                 ? Image.file(
-                                  getImage(songs[i]),
-                                  width: 50.0,
-                                  height: 50.0,
-                                ) : Icon(Icons.music_note)),
+                                    ? Image.file(
+                                        getImage(songs[i]),
+                                        width: 50.0,
+                                        height: 50.0,
+                                      )
+                                    : Container(
+                                        child: IconButton(
+                                          onPressed: null,
+                                          icon: Icon(
+                                            Icons.music_note,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(70),
+                                          // Box decoration takes a gradient
+                                          gradient: LinearGradient(
+                                            colors: <Color>[
+                                              themeChanger.accentColor,
+                                              Color(0xFF1976D2),
+                                              Color(0xFF42A5F5),
+                                            ],
+                                          ),
+                                        ))),
 
                             title: new Text(
                               songs[i].title,

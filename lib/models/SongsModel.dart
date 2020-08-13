@@ -42,7 +42,7 @@ class SongsModel extends ChangeNotifier {
       getLast();
     } else {
       try {
-        songs = await MusicFinder.allSongs();
+       // songs = await MusicFinder.allSongs();
       } catch (e) {
         print("failed to get songs");
       }
@@ -54,7 +54,7 @@ class SongsModel extends ChangeNotifier {
   }
 
   fetchSongs() async {
-    initPlayer();
+    songs = await MusicFinder.allSongs();
     if (songs.length == 0) songs = null;
     player = new MusicFinder();
     initValues();
@@ -64,7 +64,11 @@ class SongsModel extends ChangeNotifier {
     songs?.forEach((item) {
       duplicate.add(item);
     });
-
+    if(songs != null && songs.length > 0){
+      initPlayer();
+    } else{
+      songs = <Song>[];
+    }
     notifyListeners();
   }
 
@@ -196,6 +200,12 @@ class SongsModel extends ChangeNotifier {
       currentSong = songs[rnd.nextInt(max)];
     }
     updateUI();
+  }
+
+  playShuffle() {
+    setShuffle(true);
+    random_Song();
+    play();
   }
 
   Future<void> hideNotification() async {

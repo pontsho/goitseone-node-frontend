@@ -8,6 +8,7 @@ import 'package:flute_music_player/flute_music_player.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:mzansibeats/models/SongsModel.dart';
+import 'package:mzansibeats/util/showStatus.dart';
 import '../custom_icons.dart';
 import 'package:provider/provider.dart';
 import 'Player.dart';
@@ -101,7 +102,7 @@ class SearchLibrary extends StatelessWidget {
                       ),
                       Align(
                         alignment: Alignment.bottomLeft,
-                        child: showStatus(model, context),
+                        child: ShowStatus(model, height, width, context),
                       )
                     ],
                   ))),
@@ -287,90 +288,6 @@ class SearchLibrary extends StatelessWidget {
 
   push(context) {
     Navigator.push(context, SlideRightRoute(page: PlayBackPage()));
-  }
-
-  showStatus(model, BuildContext context) {
-    if (model.currentSong != null) {
-      return Container(
-        decoration: BoxDecoration(
-            color: Theme.of(context).backgroundColor,
-            border: Border(
-              top: BorderSide(
-                color: Theme.of(context).textTheme.headline4.color,
-              ),
-            )),
-        height: height * 0.06,
-        width: width,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: 1,
-          itemBuilder: (context, pos) {
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(context, Scale(page: PlayBackPage()));
-              },
-              child: Stack(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      IconButton(
-                        color: Theme.of(context).textTheme.headline4.color,
-                        icon: Icon(Icons.arrow_drop_up),
-                        onPressed: () {
-                          Navigator.push(context, Scale(page: PlayBackPage()));
-                        },
-                      ),
-                      Container(
-                        width: width * 0.75,
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 20.0),
-                          child: Text(
-                            model.currentSong.title,
-                            style: Theme.of(context).textTheme.display2,
-                            maxLines: 1,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(right: 20),
-                        child: IconButton(
-                          icon: model.currentState == PlayerState.PAUSED ||
-                                  model.currentState == PlayerState.STOPPED
-                              ? Icon(
-                                  CustomIcons.play,
-                                  color: Theme.of(context)
-                                      .textTheme
-                                      .headline4
-                                      .color,
-                                  size: 20.0,
-                                )
-                              : Icon(
-                                  CustomIcons.pause,
-                                  color: Theme.of(context)
-                                      .textTheme
-                                      .headline4
-                                      .color,
-                                  size: 20.0,
-                                ),
-                          onPressed: () {
-                            if (model.currentState == PlayerState.PAUSED ||
-                                model.currentState == PlayerState.STOPPED) {
-                              model.play();
-                            } else {
-                              model.pause();
-                            }
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-      );
-    } else {}
   }
 }
 

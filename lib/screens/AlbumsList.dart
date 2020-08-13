@@ -4,11 +4,10 @@ import 'package:mzansibeats/models/PlaylistRepo.dart';
 import 'package:mzansibeats/models/ThemeModel.dart';
 import 'package:mzansibeats/models/BookmarkModel.dart';
 import 'package:mzansibeats/models/const.dart';
-import 'package:flute_music_player/flute_music_player.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:mzansibeats/models/SongsModel.dart';
-import 'package:mzansibeats/screens/artists.dart';
+import 'package:mzansibeats/screens/albums.dart';
 import 'package:mzansibeats/util/showStatus.dart';
 import '../custom_icons.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +15,7 @@ import 'Player.dart';
 
 double height, width;
 
-class ArtistsList extends StatelessWidget {
+class AlbumsList extends StatelessWidget {
   TextEditingController editingController;
 
   SongsModel model;
@@ -74,7 +73,7 @@ class ArtistsList extends StatelessWidget {
                                   child: Stack(
                                     children: <Widget>[
                                       Text(
-                                        "Artists",
+                                        "Albums",
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 30,
@@ -93,7 +92,7 @@ class ArtistsList extends StatelessWidget {
                       ],
                   body: Stack(
                     children: <Widget>[
-                      Artists(model.db),
+                      Album(model.db),
                       Align(
                         alignment: Alignment.bottomLeft,
                           child: ShowStatus(model, height, width, context)
@@ -103,7 +102,6 @@ class ArtistsList extends StatelessWidget {
       onWillPop: () {},
     );
   }
-  
   getImage(model, pos) {
     if (model.songs[pos].albumArt != null) {
       return ClipRRect(

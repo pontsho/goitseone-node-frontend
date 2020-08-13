@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flute_music_player/flute_music_player.dart';
 import 'package:flutter/material.dart';
 import 'package:mzansibeats/database/database_client.dart';
+import 'package:mzansibeats/pages/card_detail.dart';
 import 'package:mzansibeats/util/utility.dart';
 
 class Album extends StatefulWidget {
@@ -40,10 +41,10 @@ class _stateAlbum extends State<Album> {
         elevation: 8.0,
         child: new InkResponse(
           onTap: () {
-//            Navigator.of(context)
-//                .push(new MaterialPageRoute(builder: (context) {
-//              return new CardDetail(widget.db, song);
-//            }));
+            Navigator.of(context)
+                .push(new MaterialPageRoute(builder: (context) {
+              return new CardDetail(widget.db, song);
+            }));
           },
           child: ClipRRect(
             borderRadius: BorderRadius.circular(6.0),

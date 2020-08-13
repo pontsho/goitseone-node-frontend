@@ -434,11 +434,11 @@ class _PlayBackPageState extends State<PlayBackPage> {
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return ClipOval(
-                                      child: (model.currentSong.albumArt !=
+                                      child: (model.currentSong?.albumArt !=
                                               null)
                                           ? Image.file(
                                               File.fromUri(Uri.parse(
-                                                  model.currentSong.albumArt)),
+                                                  model.currentSong?.albumArt)),
                                               width: 100,
                                               height: 100,
                                             )
@@ -463,7 +463,7 @@ class _PlayBackPageState extends State<PlayBackPage> {
                       padding: EdgeInsets.only(top: 12),
                       child: Center(
                         child: Text(
-                          model.currentSong.title,
+                          model.currentSong != null ? model.currentSong.title : "Not Playing",
                           maxLines: 1,
                           softWrap: true,
                           textAlign: TextAlign.center,
@@ -483,7 +483,7 @@ class _PlayBackPageState extends State<PlayBackPage> {
                       padding: EdgeInsets.only(top: 1.0),
                       child: Center(
                         child: Text(
-                          model.currentSong.artist.toString(),
+                          model.currentSong != null ? model.currentSong.artist.toString() : "Not Playing",
                           maxLines: 1,
                           style: TextStyle(
                             fontSize: 20,
@@ -496,9 +496,9 @@ class _PlayBackPageState extends State<PlayBackPage> {
                   Consumer<ProgressModel>(builder: (context, a, _) {
                     return SliderTheme(
                         child: Slider(
-                          max: a.duration.toDouble(),
+                          max: a?.duration?.toDouble(),
                           onChanged: (double value) {
-                            if (value.toDouble() == a.duration.toDouble()) {
+                            if (value.toDouble() == a?.duration?.toDouble()) {
                               model.player.stop();
                               model.next();
 
@@ -508,7 +508,7 @@ class _PlayBackPageState extends State<PlayBackPage> {
                               model.seek(value);
                             }
                           },
-                          value: a.position.toDouble(),
+                          value: a?.position?.toDouble(),
                         ),
                         data: SliderTheme.of(context).copyWith(
                             thumbColor: Color(0xfff1f2f6),
