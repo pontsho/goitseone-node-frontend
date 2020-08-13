@@ -43,67 +43,6 @@ class _AboutUsState extends State<AboutUs> {
                       child: Padding(
                         padding: EdgeInsets.only(top: height * 0.03),
                         child: Card(
-                          elevation: 20.0,
-                          child: Container(
-                            height: height * 0.2,
-                            width: width * 0.9,
-                            decoration: const BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: <Color>[
-                                    Color(0xFF0D47A1),
-                                    Color(0xFF1976D2),
-                                    Color(0xFF42A5F5),
-                                  ],
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0))),
-                            child: Stack(
-                              children: <Widget>[
-                                Positioned(
-                                  left: width * 0.12,
-                                  top: height * 0.065,
-                                  child: CircleAvatar(
-                                    child: Icon(CustomIcons.user),
-                                  ),
-                                ),
-                                Positioned(
-                                    left: width * 0.3,
-                                    top: height * 0.05,
-                                    child: Text.rich(TextSpan(
-                                        text: "Selva,\n",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 25,
-                                        ),
-                                        children: <TextSpan>[
-                                          new TextSpan(
-                                              text: 'Lead Developer',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 17))
-                                        ]))),
-                                Positioned(
-                                  left: width * 0.27,
-                                  top: height * 0.135,
-                                  child: IconButton(
-                                    color: Colors.transparent,
-                                    icon: Icon(
-                                      CustomIcons.paper_plane,
-                                      color: Colors.white,
-                                    ),
-                                    onPressed: _launchTg,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Align(
-                      child: Padding(
-                        padding: EdgeInsets.only(top: height * 0.03),
-                        child: Card(
                           elevation: 15.0,
                           child: Container(
                             height: height * 0.2,
@@ -132,14 +71,14 @@ class _AboutUsState extends State<AboutUs> {
                                     left: width * 0.3,
                                     top: height * 0.05,
                                     child: Text.rich(TextSpan(
-                                        text: "OjasK,\n",
+                                        text: "Pontsho,\n",
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 25,
                                         ),
                                         children: <TextSpan>[
                                           new TextSpan(
-                                              text: 'Lead Developer',
+                                              text: 'Developer',
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 17))
@@ -204,16 +143,7 @@ class _AboutUsState extends State<AboutUs> {
                                 Padding(
                                   padding: EdgeInsets.only(top: height * 0.02),
                                   child: Text(
-                                    "1. Pawan For The Flute Plugin\n\n2. Launcher Icon Made by Freepik from\n www.flaticon.com",
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 16),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(top: height * 0.02),
-                                  child: Text(
-                                    "3.The Designer Behind the Images Used",
+                                    "1. Myself ",
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 16),
@@ -235,12 +165,12 @@ class _AboutUsState extends State<AboutUs> {
 }
 
 _launchInsta() async {
-  const uri = 'https://www.instagram.com/ojask002/';
+  const uri = 'https://www.instagram.com/pontsho/';
   if (await canLaunch(uri)) {
     await launch(uri);
   } else {
     // iOS
-    const uri = 'https://www.instagram.com/ojask002/';
+    const uri = 'https://www.instagram.com/pontsho/';
     if (await canLaunch(uri)) {
       await launch(uri);
     } else {
@@ -249,23 +179,9 @@ _launchInsta() async {
   }
 }
 
-_launchTg() async {
-  const uri = 'https://selvasoft.in/';
-  if (await canLaunch(uri)) {
-    await launch(uri);
-  } else {
-    // iOS
-    const uri = 'https://selvasoft.in/';
-    if (await canLaunch(uri)) {
-      await launch(uri);
-    } else {
-      throw 'Could not launch $uri';
-    }
-  }
-}
 
 _launchGmail() async {
-  const uri = 'mailto:<ojask2002@gmail.com>?subject=Regarding Beats&body=';
+  const uri = 'mailto:<pontsho.m@gmail.com>?subject=Regarding Mzansi Beats&body=';
   if (await canLaunch(uri)) {
     await launch(uri);
   } else {
