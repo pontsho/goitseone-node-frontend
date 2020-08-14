@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:mzansibeats/models/SongsModel.dart';
 import 'package:mzansibeats/screens/albums.dart';
+import 'package:mzansibeats/util/AAppBar.dart';
 import 'package:mzansibeats/util/showStatus.dart';
 import '../custom_icons.dart';
 import 'package:provider/provider.dart';
@@ -43,51 +44,11 @@ class AlbumsList extends StatelessWidget {
                   headerSliverBuilder: (context, innerBoxIsScrolled) => [
                         SliverSafeArea(
                           top: false,
-                          sliver: SliverAppBar(
-                            leading: Padding(
-                                padding: EdgeInsets.only(
-                                    top: height * 0.01, left: 5),
-                                child: SizedBox(
-                                  width: 42.0,
-                                  height: 42.0,
-                                  child: IconButton(
-                                    iconSize: 35.0,
-                                    icon: Icon(
-                                      CustomIcons.arrow_circle_o_left,
-                                      color: Colors.red,
-                                    ),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                  ),
-                                )),
-                            automaticallyImplyLeading: false,
-                            backgroundColor: Theme.of(context).backgroundColor,
-                            expandedHeight: height * 0.11,
-                            pinned: true,
-                            flexibleSpace: Align(
-                              alignment: Alignment.topCenter ,
-                              child: Padding(
-                                padding: EdgeInsets.only(top: 15),
-                                child: Container(
-                                  child: Stack(
-                                    children: <Widget>[
-                                      Text(
-                                        "Albums",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 30,
-                                            color: Theme.of(context)
-                                                .textTheme
-                                                .headline4
-                                                .color),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
+                          sliver: MzansiAppBar(
+                              title: "Albums",
+                              isBack: true,
+                              height: height,
+                              width: width),
                         )
                       ],
                   body: Stack(
@@ -102,36 +63,6 @@ class AlbumsList extends StatelessWidget {
       onWillPop: () {},
     );
   }
-  getImage(model, pos) {
-    if (model.songs[pos].albumArt != null) {
-      return ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child:
-              Image.file(File.fromUri(Uri.parse(model.songs[pos].albumArt))));
-    } else {
-      return Container(
-          child: IconButton(
-            onPressed: null,
-            icon: Icon(
-              Icons.music_note,
-              color: Colors.white,
-            ),
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(70),
-            // Box decoration takes a gradient
-            gradient: LinearGradient(
-              colors: <Color>[
-                themeChanger.accentColor,
-                Color(0xFF1976D2),
-                Color(0xFF42A5F5),
-              ],
-            ),
-          ));
-    }
-  }
 
-  push(context) {
-    Navigator.push(context, SlideRightRoute(page: PlayBackPage()));
-  }
+
 }

@@ -7,6 +7,7 @@ import 'dart:io';
 import 'package:mzansibeats/models/SongsModel.dart';
 import 'package:mzansibeats/screens/AlbumsList.dart';
 import 'package:mzansibeats/screens/ArtistsList.dart';
+import 'package:mzansibeats/screens/PlayLists.dart';
 import 'package:mzansibeats/screens/Songs.dart';
 import 'package:mzansibeats/util/showStatus.dart';
 import '../custom_icons.dart';
@@ -40,7 +41,9 @@ class Library extends StatelessWidget {
           resizeToAvoidBottomInset: false,
           backgroundColor: Theme.of(context).backgroundColor,
           body: NestedScrollView(
-              headerSliverBuilder: (context, innerBoxIsScrolled) => [
+              headerSliverBuilder: (context, innerBoxIsScrolled) {
+                print("innerBoxIsScrolled $innerBoxIsScrolled");
+                return [
                     SliverSafeArea(
                       top: false,
                       sliver: SliverAppBar(
@@ -71,7 +74,7 @@ class Library extends StatelessWidget {
                         ),
                       ),
                     )
-                  ],
+                  ];},
               body: Stack(
                 children: <Widget>[
                   Column(
@@ -104,7 +107,11 @@ class Library extends StatelessWidget {
           ),
           ListTile(
             trailing: new Icon(CupertinoIcons.forward),
-            onTap: () async {},
+            onTap: () async {Navigator.push(
+                context,
+                EnterExitRoute(
+                    exitPage: Library(), enterPage: PlayList()));
+            },
             title: Text(
               "Playlits",
               maxLines: 1,
