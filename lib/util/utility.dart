@@ -21,7 +21,7 @@ Widget avatar(context, File f, String title) {
       ),
     )
         : new CircleAvatar(
-      child: new Text(title[0].toUpperCase()),
+      child: new Text(title[0]),
     ),
   );
 }

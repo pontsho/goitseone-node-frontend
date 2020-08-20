@@ -61,7 +61,7 @@ class _StateArtist extends State<Artists> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                         child: Text(
-                          song.artist.toUpperCase(),
+                          song.artist,
                           style: new TextStyle(
                               fontSize: 13.0,
                               fontWeight: FontWeight.w600,

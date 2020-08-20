@@ -132,7 +132,7 @@ class stateCardDetail extends State<ArtistCard> {
                           padding: const EdgeInsets.only(
                               left: 15.0, top: 15.0, bottom: 10.0),
                           child: Text(
-                            "Albums".toUpperCase(),
+                            "Albums",
                             style: TextStyle(
                                 fontSize: 17.0,
                                 fontWeight: FontWeight.w600,
@@ -182,7 +182,7 @@ class stateCardDetail extends State<ArtistCard> {
                                             padding: EdgeInsets.fromLTRB(
                                                 10.0, 8.0, 5.0, 0.0),
                                             child: Text(
-                                              albums[i].album.toUpperCase(),
+                                              albums[i].album,
                                               style: new TextStyle(
                                                   fontSize: 13.5,
                                                   fontWeight: FontWeight.w500,
@@ -211,7 +211,7 @@ class stateCardDetail extends State<ArtistCard> {
                         Padding(
                           padding: const EdgeInsets.only(
                               left: 15.0, top: 0.0, bottom: 10.0),
-                          child: Text("Songs".toUpperCase(),
+                          child: Text("Songs",
                               style: TextStyle(
                                   fontSize: 17.0,
                                   fontWeight: FontWeight.w600,

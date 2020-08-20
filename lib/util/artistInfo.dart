@@ -72,7 +72,7 @@ class _GetArtistDetailState extends State<GetArtistDetail> {
                 padding:
                     const EdgeInsets.only(left: 15.0, top: 15.0, bottom: 10.0),
                 child: Text(
-                  "Similar artists".toUpperCase(),
+                  "Similar artists",
                   style: TextStyle(
                       fontSize: 17.0,
                       fontWeight: FontWeight.w600,
@@ -117,7 +117,7 @@ class _GetArtistDetailState extends State<GetArtistDetail> {
                                       artist.artist.similar.artist
                                           .toList()[i]
                                           .name
-                                          .toUpperCase(),
+                                          ,
                                       textAlign: TextAlign.left,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(

@@ -257,7 +257,7 @@ class _ListSong extends State<ListSongs> {
                                     padding:
                                         EdgeInsets.symmetric(vertical: 10.0)),
                                 OutlineButton(
-                                  child: Text("Add Songs".toUpperCase()),
+                                  child: Text("Add Songs"),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8.0)),
                                   onPressed: _modelBottomSheet,
