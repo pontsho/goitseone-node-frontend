@@ -1,38 +1,40 @@
 import 'package:flute_music_player/flute_music_player.dart';
 import 'package:flutter/widgets.dart';
-import 'BookmarkHelper.dart';
+import 'package:mzansibeats/database/database_client.dart';
 
 class BookmarkModel extends ChangeNotifier {
-  BookmarkHelper db;
+  DatabaseClient db;
   List<Song> bookmarks = List<Song>();
 
   BookmarkModel() {
-    db = BookmarkHelper();
+    initPlayer();
     fetchBookmarks();
+  }
+
+  void initPlayer() async {
+    db = new DatabaseClient();
+    await db.create();
   }
 
   add(Song song) async {
-    if (!alreadyExists(song)) {
-      await db.add(song);
-      fetchBookmarks();
-    }
-  }
-
-  remove(Song song) async{
-    await db.remove(song);
+    await db.favSong(song);
     fetchBookmarks();
   }
 
-  alreadyExists(s) {
-    for(Song item in bookmarks){
-      if (s.uri==item.uri) return true;
-    }
-    return false;
+  remove(Song song) async {
+    await db.favSong(song);
+    fetchBookmarks();
+  }
+
+  alreadyExists(s) async {
+    if( (await db.isfav(s)) == 1)
+      return true;
+    else
+      return false;
   }
 
   fetchBookmarks() async {
-    bookmarks = await db.getBookmarks();
+    bookmarks = await db.fetchFavSong();
     notifyListeners();
   }
-
 }
